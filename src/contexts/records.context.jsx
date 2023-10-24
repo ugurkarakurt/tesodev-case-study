@@ -1,19 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { get } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
-
-
-const generatePageNumbers = (currentPage, totalPages) => {
-  if (totalPages <= 6) {
-    return Array.from({ length: totalPages }, (_, index) => index + 1);
-  }
-
-  if (currentPage > 2 && currentPage <= totalPages - 2) {
-    return [1, '• • •', currentPage - 1, currentPage, currentPage + 1, '• • •', totalPages];
-  }
-
-  return [1, 2, 3, '• • •', totalPages - 2, totalPages - 1, totalPages];
-};
+import { generatePageNumbers, setOrderedItems } from '../utils/pagination/pagination';
 
 export const RecordsContext = createContext({
   recordsMap: null,
@@ -32,6 +20,8 @@ export const RecordsContext = createContext({
   setPageNumbers: () => { },
   isContentLoaded: false,
   setIsContentLoaded: () => { },
+  sortingKey: 'default',
+  setSortingKey: () => { },
 });
 
 export const RecordsProvider = ({ children }) => {
@@ -43,36 +33,39 @@ export const RecordsProvider = ({ children }) => {
   const [totalPages, setTotalPages] = useState('');
   const [pageNumbers, setPageNumbers] = useState([]);
   const [isContentLoaded, setIsContentLoaded] = useState(false);
+  const [sortingKey, setSortingKey] = useState('default');
 
   useEffect(() => {
     const getRecordsMap = async () => {
-      await get('http://localhost:3000/results')
-        .then((RecordsData) => {
-          setRecordsMap(RecordsData);
-        })
-        .then(() => {
-          setIsContentLoaded(true);
-        })
+      if (!recordsMap) {
+        const RecordsData = await get('http://localhost:3000/results');
+        setRecordsMap(RecordsData);
+        setIsContentLoaded(true);
+      }
     };
     getRecordsMap();
-  }, []);
+  }, [recordsMap]);
+
 
   useEffect(() => {
-    if (searchValue < 2) {
-      setFilteredRecords(recordsMap && recordsMap);
-      return;
-    }
-    setFilteredRecords(recordsMap && filterWithSearchValue(recordsMap, searchValue));
+    searchValue < 2
+      ? setFilteredRecords(recordsMap && recordsMap)
+      : setFilteredRecords(recordsMap && filterWithSearchValue(recordsMap, searchValue));
+
   }, [recordsMap, searchValue]);
 
   useEffect(() => {
-    setTotalPages(filteredRecords && Math.ceil(filteredRecords.length / itemsPerPage));
+    filteredRecords && itemsPerPage && setTotalPages(Math.ceil(filteredRecords.length / itemsPerPage));
+
   }, [filteredRecords, itemsPerPage]);
 
   useEffect(() => {
-    setPageNumbers(generatePageNumbers(currentPage, totalPages))
+    setPageNumbers(generatePageNumbers(currentPage, totalPages));
   }, [currentPage, totalPages]);
 
+  useEffect(() => {
+    setFilteredRecords(setOrderedItems(filteredRecords, sortingKey));
+  }, [sortingKey, filteredRecords]);
 
   const value = {
     recordsMap,
@@ -89,7 +82,9 @@ export const RecordsProvider = ({ children }) => {
     pageNumbers,
     setPageNumbers,
     isContentLoaded,
-    setIsContentLoaded
+    setIsContentLoaded,
+    sortingKey,
+    setSortingKey,
   };
 
   return (

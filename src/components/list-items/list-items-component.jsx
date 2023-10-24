@@ -5,9 +5,13 @@ import Pagination from '../pagination/pagination.component';
 import EmptyResult from '../empty-result/empty-result.component';
 import LoadingSpinner from '../loading-spinner/loading-spinner.component';
 import { ListContainer, ListItemsContainer, ListItemsWrapper, Divider, ListActionsContainer } from './list-items.styles';
+import Dropdown from '../dropdown/dropdown.component';
 
 const ListItems = () => {
-  const { filteredRecords, currentPage, itemsPerPage } = useContext(RecordsContext);
+  const { filteredRecords, currentPage, itemsPerPage, setItemsPerPage, setSortingKey } = useContext(RecordsContext);
+
+  const handleClickByItemsPerPage = (itemsRange) => setItemsPerPage(itemsRange)
+  const handleClickByOrderItems = (orderValue) => setSortingKey(orderValue);
 
   return (
     <ListContainer>
@@ -29,23 +33,17 @@ const ListItems = () => {
         <Pagination />
       </ListItemsContainer>
       <ListActionsContainer>
-        <div className="page-length">
-          <select name="page-length" id="pageLength"> // Select Optionları component ypaacaksın yarın
-            <option value="5">5</option>
-            <option value="5">10</option>
-            <option value="5">20</option>
-            <option value="5">50</option>
-          </select>
-        </div>
-        <div className="list-order">
-          <select name="list-order" id="listOrder">
-            <option value="">Order By</option>
-            <option value="5">Name ascending</option>
-            <option value="5">Name descending</option>
-            <option value="5">Year ascending</option>
-            <option value="5">Year descending</option>
-          </select>
-        </div>
+        <Dropdown
+          onOptionClicked={handleClickByItemsPerPage}
+          selectedOption={itemsPerPage}
+          title={"Results Rer Page"}
+          options={[5, 10, 20, 50]} />
+        <Dropdown
+          onOptionClicked={handleClickByOrderItems}
+          selectedOption={"Order By"}
+          title={"Order By"}
+          options={["Name ascending", "Name descending", "Company ascending", "Company descending"]}
+        />
       </ListActionsContainer>
     </ListContainer>
   );

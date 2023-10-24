@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const ListContainer = styled.div`
   width: 870px;
-  min-height: 100vh;
   margin-top: 30px;
   display: flex;
+  padding-bottom: 100px;
 `;
 export const ListActionsContainer = styled.div`
 
