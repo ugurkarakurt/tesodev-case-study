@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const HomeNavgationContainer = styled.div`
+export const HomeNavigationContainer = styled.div`
   padding-top: 183px;
   width: 100%;
   display: flex;

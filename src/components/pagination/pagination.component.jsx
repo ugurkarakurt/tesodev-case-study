@@ -3,7 +3,7 @@ import { RecordsContext } from '../../contexts/records.context';
 import { PaginstionContainer, PaginationButton, PaginationButtonContainer } from "./pagination.stlyes";
 
 function Pagination() {
-  const { filteredRecords, currentPage, setCurrentPage, totalPages, pageNumbers } = useContext(RecordsContext);
+  const { filteredRecords, currentPage, setCurrentPage, totalPages, pageNumbers, itemsPerPage } = useContext(RecordsContext);
   const [isClicked, setIsClicked] = useState(false);
 
   const handlePageChange = (page) => {
@@ -16,16 +16,16 @@ function Pagination() {
   };
 
   useEffect(() => {
-    setIsClicked(false)
-  }, [currentPage]);
+    setIsClicked(false);
+  }, [currentPage, filteredRecords]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filteredRecords, setCurrentPage]);
+  }, [filteredRecords]);  
 
   return (
     <>
-      {filteredRecords && filteredRecords.length > 5 && (
+      {filteredRecords && (filteredRecords.length >= itemsPerPage) && (
         <PaginstionContainer>
           <PaginationButtonContainer>
             <PaginationButton disabled={currentPage < 2} $isdirection={true} onClick={() => handlePageChange(currentPage - 1)}>

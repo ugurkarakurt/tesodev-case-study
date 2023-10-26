@@ -1,38 +1,135 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from "styled-components";
 
-export const DropDownContainer = styled.div`
-  width: fit-content;
-  margin: 0 auto;
-`;
+const navbarAnimation = keyframes`
+   0% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 50, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 50, 0, 1)
+  }
 
-export const DropDownHeader = styled.div`
-  margin-bottom: 0.8em;
-  padding: 0.4em 2em 0.4em 1em;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  font-weight: 500;
-  font-size: 14px;
-  color: #3faffa;
-  background: #ffffff;
-`;
+  4.3% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 24.286, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 24.286, 0, 1)
+  }
 
-export const DropDownListContainer = styled.div``;
+  8.61% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 6.071, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 6.071, 0, 1)
+  }
 
-export const DropDownList = styled.ul`
-  padding: 0;
-  margin: 0;
-  padding-left: 1em;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  box-sizing: border-box;
-  color: #3faffa;
-  font-size: 14px;
-  font-weight: 500;
-  &:first-child {
-    padding-top: 0.8em;
+  12.91% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2.614, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2.614, 0, 1)
+  }
+
+  17.22% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -4.667, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -4.667, 0, 1)
+  }
+
+  28.33% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.031, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.031, 0, 1)
+  }
+
+  39.44% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, .312, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, .312, 0, 1)
+  }
+
+  61.66% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.021, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.021, 0, 1)
+  }
+
+  83.98% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, .001, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, .001, 0, 1)
+  }
+
+  100% {
+    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
   }
 `;
 
+const isActive = css`
+    border-radius: 8px;
+    background: #b3b3b3;
+`;
+
+export const DropDownHeader = styled.div`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  user-select: none;
+  color: #484848;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  padding: 5px;
+`;
+
+export const DropDownBody = styled.div`
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #8f8f8f;
+  background: #fff;
+  box-shadow: 4px 6px 12px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  animation: ${navbarAnimation} 1000ms linear both;
+  gap: 2px;
+`;
+
 export const DropDownListItem = styled.li`
+  text-align: center;
   list-style: none;
-  margin-bottom: 0.8em;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    border-radius: 8px;
+    background: #b3b3b3;
+  }
+  ${({ $isActive }) => $isActive && isActive};
+
+`;
+
+export const BaseDropdown = styled.div`
+  width: 75px;
+  border-radius: 8px;
+  border: 1px solid #414141;
+  background: #f3f2f2;
+  position: relative;
+  padding: 0 10px 0 30px;
+  img{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+  }
+`;
+export const OrderDropdown = styled(BaseDropdown)`
+  width: fit-content;
+
+  ${DropDownHeader} {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90px;
+  }
+  ${DropDownBody} {
+    width: fit-content;
+  }
+  ${DropDownListItem} {
+    text-align: start;
+    white-space: nowrap;
+  }
 `;

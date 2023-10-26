@@ -5,16 +5,19 @@ export const ListContainer = styled.div`
   margin-top: 30px;
   display: flex;
   padding-bottom: 100px;
+  gap: 15px;
 `;
 export const ListActionsContainer = styled.div`
-
+  display: flex;
+  gap: 10px;
+  height: fit-content;
 `;
 
 export const ListItemsContainer = styled.div`
   flex:  1 1;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   gap: 50px;
 `;
 

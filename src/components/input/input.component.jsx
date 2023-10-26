@@ -45,33 +45,3 @@ const InputGroup = ({ children, inputType, label, error, ...otherProps }) => {
 
 export default InputGroup;
 
-
-// import { useEffect, useRef } from 'react';
-// import { Group, Input, FormInputLabel } from './form-input.styles';
-// import { useLocation } from 'react-router-dom';
-
-// const FormInput = ({ label, ...otherProps }) => {
-//   const location = useLocation();
-//   const path = location.pathname.startsWith('/list') || location.pathname.startsWith('/');
-//   const inputRef = useRef(null);
-
-//   useEffect(() => {
-//     if (path) {
-//       inputRef.current.focus();
-//     }
-//   }, [path]);
-
-//   return (
-//     <Group>
-//       <Input {...otherProps} />
-//       {label && (
-//         <FormInputLabel useRef={inputRef} shrink={otherProps.value.length}>
-//           {label}
-//         </FormInputLabel>
-//       )}
-//     </Group>
-//   );
-// };
-
-// export default FormInput;
-

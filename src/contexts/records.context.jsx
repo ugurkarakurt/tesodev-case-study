@@ -1,28 +1,13 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import { get } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
 import { generatePageNumbers, setOrderedItems } from '../utils/pagination/pagination';
 
-export const RecordsContext = createContext({
-  recordsMap: null,
-  setRecordsMap: () => { },
-  searchValue: '',
-  setSearchValue: () => { },
-  filteredRecords: null,
-  setFilteredRecords: () => { },
-  currentPage: 1,
-  setCurrentPage: () => { },
-  itemsPerPage: 5,
-  setItemsPerPage: () => { },
-  totalPages: '',
-  setTotalPages: () => { },
-  pageNumbers: [],
-  setPageNumbers: () => { },
-  isContentLoaded: false,
-  setIsContentLoaded: () => { },
-  sortingKey: 'default',
-  setSortingKey: () => { },
-});
+export const RecordsContext = createContext();
+
+export const useRecords = () => {
+  return useContext(RecordsContext);
+};
 
 export const RecordsProvider = ({ children }) => {
   const [recordsMap, setRecordsMap] = useState(null);
@@ -30,42 +15,47 @@ export const RecordsProvider = ({ children }) => {
   const [filteredRecords, setFilteredRecords] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalPages, setTotalPages] = useState('');
-  const [pageNumbers, setPageNumbers] = useState([]);
-  const [isContentLoaded, setIsContentLoaded] = useState(false);
-  const [sortingKey, setSortingKey] = useState('default');
+  const [sortingKey, setSortingKey] = useState('');
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const getRecordsMap = async () => {
-      if (!recordsMap) {
+    if (!recordsMap) {
+      const getRecordsMap = async () => {
         const RecordsData = await get('http://localhost:3000/results');
         setRecordsMap(RecordsData);
-        setIsContentLoaded(true);
-      }
-    };
-    getRecordsMap();
-  }, [recordsMap]);
+      };
+      getRecordsMap();
+    }
+  }, []);
 
 
   useEffect(() => {
-    searchValue < 2
-      ? setFilteredRecords(recordsMap && recordsMap)
-      : setFilteredRecords(recordsMap && filterWithSearchValue(recordsMap, searchValue));
-
+    if (searchValue.length < 2) {
+      setFilteredRecords(recordsMap);
+    } else {
+      setFilteredRecords(filterWithSearchValue(recordsMap, searchValue));
+    }
   }, [recordsMap, searchValue]);
 
   useEffect(() => {
-    filteredRecords && itemsPerPage && setTotalPages(Math.ceil(filteredRecords.length / itemsPerPage));
-
+    if (filteredRecords && itemsPerPage) {
+      setTotalPages(Math.ceil(filteredRecords.length / itemsPerPage));
+    } else {
+      setTotalPages(0);
+    }
   }, [filteredRecords, itemsPerPage]);
 
-  useEffect(() => {
-    setPageNumbers(generatePageNumbers(currentPage, totalPages));
-  }, [currentPage, totalPages]);
+  const pageNumbers = generatePageNumbers(currentPage, totalPages);
 
   useEffect(() => {
-    setFilteredRecords(setOrderedItems(filteredRecords, sortingKey));
-  }, [sortingKey, filteredRecords]);
+    if (sortingKey && filteredRecords) {
+      const sortedRecords = setOrderedItems([...filteredRecords], sortingKey);
+      setFilteredRecords(sortedRecords);
+      console.log(sortedRecords[0]);
+    }
+  }, [sortingKey]);
+
+
 
   const value = {
     recordsMap,
@@ -73,16 +63,12 @@ export const RecordsProvider = ({ children }) => {
     searchValue,
     setSearchValue,
     filteredRecords,
-    setFilteredRecords,
     currentPage,
     setCurrentPage,
     itemsPerPage,
     setItemsPerPage,
     totalPages,
     pageNumbers,
-    setPageNumbers,
-    isContentLoaded,
-    setIsContentLoaded,
     sortingKey,
     setSortingKey,
   };

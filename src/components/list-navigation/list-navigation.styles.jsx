@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const ListNavgationContainer = styled.div`
+export const ListNavigationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

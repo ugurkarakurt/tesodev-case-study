@@ -1,21 +1,19 @@
 import React from 'react';
-import Button from "../button/button.component";
-import { HomeNavgationContainer, HomeAddButtonContainer, LogoContainer } from './home-navigation.styles';
+import Button from '../button/button.component';
+import { HomeNavigationContainer, HomeAddButtonContainer, LogoContainer } from './home-navigation.styles';
 import Logo from '../logo/logo.component';
-
 
 const HomeNavigation = () => {
   return (
-    <>
-      <HomeNavgationContainer>
-        <HomeAddButtonContainer>
-          <Button children={'Add new record'} type="button" />
-        </HomeAddButtonContainer>
-        <LogoContainer to='/'>
-          <Logo />
-        </LogoContainer>
-      </HomeNavgationContainer>
-    </>
-  )
-}
+    <HomeNavigationContainer>
+      <HomeAddButtonContainer>
+        <Button children="Add new record" type="button" />
+      </HomeAddButtonContainer>
+      <LogoContainer to="/">
+        <Logo />
+      </LogoContainer>
+    </HomeNavigationContainer>
+  );
+};
+
 export default HomeNavigation;
