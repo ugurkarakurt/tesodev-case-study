@@ -32,7 +32,7 @@ export const ListPreviewSearchContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 24px;
-  padding-right: 65px;
+  padding-right: 60px;
 
   img {
     display: none;
@@ -41,13 +41,15 @@ export const ListPreviewSearchContainer = styled.div`
   input {
     padding-left: 20px;
   }
-  a {
+  div {
     position: static;
     transform: none;
   }
 `;
 
-export const ListAddButtonContainer = styled.div``;
+export const ListAddButtonContainer = styled.div`
+  width: fit-content;
+`;
 
 export const SearchButtonContainer = styled(Link)`
   display: flex;

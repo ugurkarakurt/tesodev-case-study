@@ -10,10 +10,8 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
 }[buttonType]);
 
 const Button = ({ children, buttonType, ...otherProps }) => {
-
   const CustomButton = getButton(buttonType);
-
-  return <CustomButton {...otherProps}>{children}</CustomButton>;
+  return <CustomButton to={otherProps.link} $disabled={otherProps.disabled}>{children}</CustomButton>;
 };
 
 export default Button;

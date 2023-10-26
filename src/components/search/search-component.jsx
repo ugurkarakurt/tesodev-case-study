@@ -7,7 +7,9 @@ import { RecordsContext } from '../../contexts/records.context';
 
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(RecordsContext);
+  const { searchValue, setSearchValue, filteredRecords } = useContext(RecordsContext);
+
+  const filteredRecordsLength = filteredRecords && filteredRecords.length
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -26,8 +28,8 @@ const Search = () => {
         name='search'
         value={searchValue}
       />
-      <SearchButtonContainer to="/list">
-        <Button disabled={searchValue.length < 2} children={'Search'} type="button" />
+      <SearchButtonContainer>
+        <Button disabled={searchValue.length < 2 || filteredRecordsLength < 1} link="/list" children={'Search'} type="button" />
       </SearchButtonContainer>
     </>
   )

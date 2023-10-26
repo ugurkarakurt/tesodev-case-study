@@ -14,7 +14,7 @@ const ListNavigation = () => {
         <Search />
       </ListPreviewSearchContainer>
       <ListAddButtonContainer>
-        <Button children="Add new record" type="button" />
+        <Button children="Add new record" link={'/add'} type="button" />
       </ListAddButtonContainer>
     </ListNavigationContainer>
   );

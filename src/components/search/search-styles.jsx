@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-export const SearchButtonContainer = styled(Link)`
+export const SearchButtonContainer = styled.div`
   width: fit-content;
   position: absolute;
   left: calc(100% - 23px);

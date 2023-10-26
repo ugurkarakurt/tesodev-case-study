@@ -60,7 +60,6 @@ const isActive = css`
 export const DropDownHeader = styled.div`
   width: 100%;
   height: 100%;
-  cursor: pointer;
   user-select: none;
   color: #484848;
   font-size: 18px;
@@ -108,6 +107,7 @@ export const BaseDropdown = styled.div`
   background: #f3f2f2;
   position: relative;
   padding: 0 10px 0 30px;
+  cursor: pointer;
   img{
     position: absolute;
     left: 10px;

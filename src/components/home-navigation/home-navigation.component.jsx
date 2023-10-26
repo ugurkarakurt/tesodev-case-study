@@ -7,7 +7,7 @@ const HomeNavigation = () => {
   return (
     <HomeNavigationContainer>
       <HomeAddButtonContainer>
-        <Button children="Add new record" type="button" />
+        <Button children="Add new record" link={'/add'} type="button" />
       </HomeAddButtonContainer>
       <LogoContainer to="/">
         <Logo />

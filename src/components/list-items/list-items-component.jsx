@@ -39,7 +39,7 @@ const ListItems = () => {
         <Pagination />
       </ListItemsContainer>
       <ListActionsContainer>
-        <Dropdown
+        {filteredRecords && (filteredRecords.length >= itemsPerPage) && (<Dropdown
           children={'Results Per Page'}
           dropdownType={"page"}
           onOptionClicked={handleClickByItemsPerPage}
@@ -47,8 +47,9 @@ const ListItems = () => {
           options={[5, 10, 20, 50]}
           isActive={itemsPerPage}
           icon={PageIcon}
-        />
-        <Dropdown
+        />)}
+
+        {filteredRecords && (filteredRecords.length > 1) && (<Dropdown
           children={'Order By'}
           dropdownType={"order"}
           onOptionClicked={handleClickByOrderItems}
@@ -56,7 +57,7 @@ const ListItems = () => {
           options={["Name ascending", "Name descending", "Company ascending", "Company descending"]}
           isActive={sortingKey}
           icon={OrderIcon}
-        />
+        />)}
       </ListActionsContainer>
     </ListContainer>
   );
