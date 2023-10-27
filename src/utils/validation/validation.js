@@ -1,7 +1,6 @@
 export const collectFormData = (formFields) => {
   const formData = {
     nameSurname: formFields.nameSurname.value,
-    company: formFields.company.value,
     country: formFields.country.value,
     city: formFields.city.value,
     email: formFields.email.value,
@@ -19,14 +18,13 @@ export const validationForAddForm = (formFields) => {
     switch (fieldName) {
       case "nameSurname":
         if (!checknameSurname(value)) {
-          validationErrors[fieldName] = "Name Surname only letters, min 4 – max 60 character.";
+          validationErrors[fieldName] = "Name Surname, only letters, min 4 – max 60 character must include.";
         }
         break;
-      case "company":
       case "country":
       case "city":
         if (!checkCountryOrCity(value)) {
-          validationErrors[fieldName] = `${fieldName} only letters, min 2 – max 40 character.`;
+          validationErrors[fieldName] = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}, only letters, min 2 – max 40 character must include.`;
         }
         break;
       case "email":

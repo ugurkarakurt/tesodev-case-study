@@ -11,10 +11,6 @@ const defaultFormFields = {
     value: '',
     error: ''
   },
-  company: {
-    value: '',
-    error: ''
-  },
   country: {
     value: '',
     error: ''
