@@ -7,4 +7,10 @@ export const AddContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
+  @media (max-width: 1280px) {
+    padding: 0 20px 20px 20px;
+  }
 `;

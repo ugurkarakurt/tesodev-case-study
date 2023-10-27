@@ -17,6 +17,9 @@ export const BackButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 1280px) {
+      width: 20px;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -29,4 +32,7 @@ export const Title = styled.div`
   color: #484848;
   font-size: 24px;
   font-weight: 700;
+  @media (max-width: 1280px) {
+      font-size: 18px;
+  }
 `;

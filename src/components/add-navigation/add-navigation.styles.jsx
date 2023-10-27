@@ -8,6 +8,15 @@ export const AddNavigationContainer = styled.div`
   gap: 30px;
   width: 100%;
   padding: 27px 37px;
+  @media (max-width: 1280px) {
+    padding:27px 0;
+
+  }
+  @media (max-width: 678px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -17,6 +26,12 @@ export const LogoContainer = styled(Link)`
   width: 149px;
   height: 63px;
   position: relative;
+  @media (max-width: 678px) {
+     width: 100%;
+     img{
+      object-fit: contain;
+     }
+  }
   span{
     display: none;
   }
