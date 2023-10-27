@@ -6,7 +6,7 @@ export const DROPDOWN_TYPE_CLASSES = {
   order: 'order'
 };
 
-const getDropdown = (dropdownType = DROPDOWN_TYPE_CLASSES.base) =>
+const getDropdown = (dropdownType = DROPDOWN_TYPE_CLASSES.order) =>
 ({
   [DROPDOWN_TYPE_CLASSES.page]: BaseDropdown,
   [DROPDOWN_TYPE_CLASSES.order]: OrderDropdown,
@@ -42,7 +42,7 @@ const Dropdown = ({ children, dropdownType, selectedOption, onOptionClicked, opt
     <CustomDropdown ref={dropdownRef}>
       <img src={icon} alt="dropdown_icon" />
       <DropDownHeader onClick={toggling}>
-        {selectedOption || children}
+        {selectedOption ? selectedOption : children}
       </DropDownHeader>
       {isOpen && (
         <DropDownBody>

@@ -4,7 +4,7 @@ import { ListItemContainer, ListItemIcon, ListItemLocation, ListItemCompany, Lis
 import { useLocation } from 'react-router-dom';
 
 const ListItem = ({ record }) => {
-  const { nameSurname, company, phone, country, city } = record;
+  const { nameSurname, company, date, country, city } = record;
 
   const location = useLocation();
   const isListPage = location.pathname.startsWith('/list');
@@ -21,7 +21,7 @@ const ListItem = ({ record }) => {
       {isListPage && (
         <ListItemInfo>
           <ListItemName>{nameSurname}</ListItemName>
-          <ListItemNumber>{phone}</ListItemNumber>
+          <ListItemNumber>{date}</ListItemNumber>
         </ListItemInfo>
       )}
     </ListItemContainer>

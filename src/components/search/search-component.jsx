@@ -20,7 +20,7 @@ const Search = () => {
     <>
       <img src={SearchIcon} alt="search_icon" />
       <Input
-        children={'Search a record'}
+        children={'Search (e.g., Name, Company, Date, Email, Phone, Website, Country, City, ID)'}
         label={false}
         error={false}
         type='text'

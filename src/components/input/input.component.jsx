@@ -1,16 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { BaseInputGroup, ErrorInputGroup, Input, InputGroupLabel, InputGroupError } from './input.styles';
+import { BaseInputGroup, Input, InputGroupLabel, InputGroupError } from './input.styles';
 import { useLocation } from 'react-router-dom';
 
 export const INPUT_GROUP_TYPE_CLASSES = {
   base: 'base',
-  error: 'error'
 };
 
 const getInput = (inputType = INPUT_GROUP_TYPE_CLASSES.base) =>
 ({
   [INPUT_GROUP_TYPE_CLASSES.base]: BaseInputGroup,
-  [INPUT_GROUP_TYPE_CLASSES.error]: ErrorInputGroup,
 }[inputType]);
 
 const InputGroup = ({ children, inputType, label, error, ...otherProps }) => {
@@ -29,19 +27,20 @@ const InputGroup = ({ children, inputType, label, error, ...otherProps }) => {
   return (
     <CustomInputGroup>
       {label && (
-        <InputGroupLabel shrink={otherProps.value.length}>
+        <InputGroupLabel>
           {label}
         </InputGroupLabel>
       )}
-      <Input ref={inputRef} placeholder={children} {...otherProps} />
+      <Input $error={error} ref={inputRef} placeholder={children} {...otherProps} />
       {error && (
-        <InputGroupError shrink={otherProps.value.length}>
+        <InputGroupError>
           {error}
         </InputGroupError>
       )}
     </CustomInputGroup>
   )
 };
+
 
 export default InputGroup;
 

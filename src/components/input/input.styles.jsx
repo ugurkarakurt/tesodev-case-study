@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+export const errorInput = css`
+ background-color: #ffffff;
+    border-color: #f00;
+    color: #f00;
+`
 
 export const BaseInputGroup = styled.div`
   width: 100%;
@@ -8,14 +14,6 @@ export const BaseInputGroup = styled.div`
   justify-content: center;
   gap: 7px;
   position: relative;
-`;
-
-export const ErrorInputGroup = styled(BaseInputGroup)`
-  input {
-    background-color: #ffffff;
-    border-color: #f00;
-    color: #f00;
-  }
 `;
 
 export const Input = styled.input`
@@ -42,6 +40,8 @@ export const Input = styled.input`
   &::placeholder {
     color: rgba(100, 100, 100, 0.5);
   }
+  ${({ $error }) => $error && errorInput};
+
 `;
 
 export const InputGroupLabel = styled.label`
@@ -55,7 +55,5 @@ export const InputGroupError = styled.span`
   font-size: 18px;
   font-weight: 700;
   padding-left: 8px;
-  position: absolute;
-  top: calc(100% + 17px);
-  left: 8px;
+  margin-top: 10px;
 `;

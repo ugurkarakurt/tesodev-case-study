@@ -15,9 +15,6 @@ const ListItems = () => {
   const handleClickByItemsPerPage = (itemsRange) => setItemsPerPage(itemsRange);
   const handleClickByOrderItems = (orderValue) => setSortingKey(orderValue);
 
-  useEffect(() => {
-    setSortingKey("");
-  }, [searchValue])
 
   return (
     <ListContainer>
@@ -54,7 +51,7 @@ const ListItems = () => {
           dropdownType={"order"}
           onOptionClicked={handleClickByOrderItems}
           selectedOption={sortingKey}
-          options={["Name ascending", "Name descending", "Company ascending", "Company descending"]}
+          options={["Name ascending", "Name descending", "Date ascending", "Date descending"]}
           isActive={sortingKey}
           icon={OrderIcon}
         />)}

@@ -25,7 +25,7 @@ function Pagination() {
 
   return (
     <>
-      {filteredRecords && (filteredRecords.length >= itemsPerPage) && (
+      {filteredRecords && (filteredRecords.length > itemsPerPage) && (
         <PaginstionContainer>
           <PaginationButtonContainer>
             <PaginationButton disabled={currentPage < 2} $isdirection={true} onClick={() => handlePageChange(currentPage - 1)}>

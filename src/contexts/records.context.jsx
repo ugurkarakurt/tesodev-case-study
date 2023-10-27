@@ -17,6 +17,8 @@ export const RecordsProvider = ({ children }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [sortingKey, setSortingKey] = useState('');
   const [totalPages, setTotalPages] = useState(0);
+  const [previousPage, setPreviousPage] = useState('');
+
 
   useEffect(() => {
     if (!recordsMap) {
@@ -33,9 +35,15 @@ export const RecordsProvider = ({ children }) => {
     if (searchValue.length < 2) {
       setFilteredRecords(recordsMap);
     } else {
-      setFilteredRecords(filterWithSearchValue(recordsMap, searchValue));
+      const filteredSearchValue = filterWithSearchValue(recordsMap, searchValue)
+      if (sortingKey && filteredSearchValue) {
+        const sortedRecords = setOrderedItems([...filteredSearchValue], sortingKey);
+        setFilteredRecords(sortedRecords);
+        return
+      }
+      setFilteredRecords(filteredSearchValue);
     }
-  }, [recordsMap, searchValue]);
+  }, [recordsMap, searchValue, sortingKey]);
 
   useEffect(() => {
     if (filteredRecords && itemsPerPage) {
@@ -51,7 +59,6 @@ export const RecordsProvider = ({ children }) => {
     if (sortingKey && filteredRecords) {
       const sortedRecords = setOrderedItems([...filteredRecords], sortingKey);
       setFilteredRecords(sortedRecords);
-      console.log(sortedRecords[0]);
     }
   }, [sortingKey]);
 
@@ -63,6 +70,7 @@ export const RecordsProvider = ({ children }) => {
     searchValue,
     setSearchValue,
     filteredRecords,
+    setFilteredRecords,
     currentPage,
     setCurrentPage,
     itemsPerPage,
@@ -71,6 +79,8 @@ export const RecordsProvider = ({ children }) => {
     pageNumbers,
     sortingKey,
     setSortingKey,
+    previousPage,
+    setPreviousPage
   };
 
   return (

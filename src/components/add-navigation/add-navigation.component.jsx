@@ -1,15 +1,17 @@
 import React from 'react';
 import Logo from '../logo/logo.component';
-// import { } from './list-navigation.styles';
+import { AddNavigationContainer, LogoContainer } from './add-navigation.styles';
+import BackButton from '../back-button/back-button.component';
 
 const AddNavigation = () => {
+
   return (
-    <div>
-      <div to="/">
+    <AddNavigationContainer>
+      <LogoContainer to="/">
         <Logo />
-      </div>
-      Back button
-    </div>
+      </LogoContainer>
+      <BackButton />
+    </AddNavigationContainer>
   );
 }
 

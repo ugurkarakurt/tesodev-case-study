@@ -18,10 +18,10 @@ export const setOrderedItems = (filteredRecords, orderValue) => {
       return filteredRecords.sort((a, b) => letterEditor(a.nameSurname).localeCompare(letterEditor(b.nameSurname)));
     case "namedescending":
       return filteredRecords.sort((a, b) => letterEditor(b.nameSurname).localeCompare(letterEditor(a.nameSurname)));
-    case "companyascending":
-      return filteredRecords.sort((a, b) => letterEditor(a.company).localeCompare(letterEditor(b.company)));
-    case "companydescending":
-      return filteredRecords.sort((a, b) => letterEditor(b.company).localeCompare(letterEditor(a.company)));
+    case "dateascending":
+      return filteredRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
+    case "datedescending":
+      return filteredRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
     default:
       return filteredRecords;
   }
