@@ -29,7 +29,7 @@ export const Input = styled.input`
   font-weight: bold;
 
   &:hover {
-    background-color: rgba(72, 72, 72, 0.6);
+    background-color: #f0f0f0;
   }
 
   &:focus {
@@ -41,6 +41,11 @@ export const Input = styled.input`
     color: rgba(100, 100, 100, 0.5);
   }
   ${({ $error }) => $error && errorInput};
+
+  @media (max-width: 1280px) {
+    font-size: 14px;
+    height: 40px;
+  }
 
 `;
 

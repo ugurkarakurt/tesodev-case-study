@@ -9,16 +9,22 @@ export const HomeNavigationContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid rgba(240, 230, 210, 0.1);
   position: relative;
+  @media (max-width: 1280px) {
+   padding-top: 100px;
+  }
 `;
 
 export const HomeAddButtonContainer = styled.div`
   position: absolute;
   top: 64px;
   right: 0;
+  @media (max-width: 1280px) {
+    top: 20px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
- width: 278px;
+  width: 278px;
   height: 115px;
   display: flex;
   justify-content: center;

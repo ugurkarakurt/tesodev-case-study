@@ -24,6 +24,10 @@ export const BaseButton = styled(Link)`
   transition: background 0.1s ease-in-out;
   border-radius: 8px;
   padding: 0 42px;
+  @media (max-width: 1280px) {
+    font-size: 14px;
+    height: 36px;
+  }
 
   &:hover {
     background-color: #4f75c2;

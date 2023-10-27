@@ -13,4 +13,11 @@ export const SearchButtonContainer = styled.div`
       top: 1px;
     }
   }
+  @media (max-width: 991px) {
+    position: static;
+    transform: none;
+  }
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;

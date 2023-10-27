@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const borderBottom = css`
- border-color: transparent;
+  border-color: transparent;
 `;
 
 export const ListPreviewContainer = styled.div`
@@ -12,6 +12,9 @@ export const ListPreviewContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   position: relative;
+  @media (max-width: 991px) {
+    width: 100%;
+  }
 `;
 export const ListPreviewTitle = styled.h2`
   color: #090a0a;
@@ -19,6 +22,10 @@ export const ListPreviewTitle = styled.h2`
   font-weight: 700;
   margin-bottom: 18px;
   padding: 0 24px;
+  @media (max-width: 991px) {
+    padding: 0;
+    font-size: 24px;
+  }
 `;
 
 export const ListPreviewSearchContainer = styled.div`
@@ -27,6 +34,17 @@ export const ListPreviewSearchContainer = styled.div`
   font-weight: 700;
   position: relative;
   padding: 0 35px;
+  @media (max-width: 991px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
 
   img {
     position: absolute;
@@ -34,6 +52,14 @@ export const ListPreviewSearchContainer = styled.div`
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    @media (max-width: 991px) {
+      left: 17px;
+      width: 20px;
+    }
+    @media (max-width: 576px) {
+      top: 10px;
+      transform: none;
+    }
   }
 
   input {

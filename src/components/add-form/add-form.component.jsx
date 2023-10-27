@@ -30,7 +30,7 @@ const defaultFormFields = {
 };
 
 const AddFormComponent = () => {
-  const { filteredRecords, setFilteredRecords, setSortingKey } = useContext(RecordsContext);
+  const { filteredRecords, setFilteredRecords } = useContext(RecordsContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
@@ -59,7 +59,9 @@ const AddFormComponent = () => {
       post("http://localhost:3000/results", postData)
         .then((response) => {
           setFilteredRecords([...filteredRecords, response]);
-          setSortingKey("");
+        })
+        .then(() => {
+          setFormFields(defaultFormFields);
         })
         .catch((error) => {
           console.error(error);

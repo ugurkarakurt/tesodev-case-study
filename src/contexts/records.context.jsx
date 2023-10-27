@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import { get } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
 import { generatePageNumbers, setOrderedItems } from '../utils/pagination/pagination';
+import config from '../config/config';
 
 export const RecordsContext = createContext();
 
@@ -18,12 +19,13 @@ export const RecordsProvider = ({ children }) => {
   const [sortingKey, setSortingKey] = useState('');
   const [totalPages, setTotalPages] = useState(0);
   const [previousPage, setPreviousPage] = useState('');
+  const apiUrl = config.apiUrl;
 
 
   useEffect(() => {
     if (!recordsMap) {
       const getRecordsMap = async () => {
-        const RecordsData = await get('http://localhost:3000/results');
+        const RecordsData = await get(apiUrl);
         setRecordsMap(RecordsData);
       };
       getRecordsMap();
