@@ -6,11 +6,18 @@ export const ListContainer = styled.div`
   display: flex;
   padding-bottom: 100px;
   gap: 15px;
+  @media (max-width: 991px) {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
 `;
 export const ListActionsContainer = styled.div`
   display: flex;
   gap: 10px;
   height: fit-content;
+  @media (max-width: 991px) {
+    justify-content: flex-end;
+  }
 `;
 
 export const ListItemsContainer = styled.div`

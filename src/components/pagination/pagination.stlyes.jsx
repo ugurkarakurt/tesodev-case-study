@@ -78,7 +78,9 @@ export const activeButton = css`
   animation: ${slideAnimation} 1000ms linear both;
 `;
 
-export const PaginstionContainer = styled.div``;
+export const PaginstionContainer = styled.div`
+  width: 100%;
+`;
 export const PaginationButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -105,5 +107,11 @@ export const PaginationButton = styled.button`
     background-color: #B3B3B3;
     cursor: default;
     color: #ffffff;
+  }
+  @media (max-width: 991px) {
+    display: none;
+    &:first-child, &:last-child{
+      display: block;
+    }
   }
 `;

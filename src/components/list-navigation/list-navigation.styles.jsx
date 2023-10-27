@@ -8,6 +8,14 @@ export const ListNavigationContainer = styled.div`
   padding: 27px 0;
   width: 1174px;
   gap: 35px;
+
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
+  @media (max-width: 991px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -33,6 +41,19 @@ export const ListPreviewSearchContainer = styled.div`
   align-items: center;
   gap: 24px;
   padding-right: 60px;
+  @media (max-width: 1280px) {
+    padding: 0;
+  }
+
+  @media (max-width: 991px) {
+    flex:  1 1 100%;
+    order: 2;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+
 
   img {
     display: none;
@@ -49,6 +70,9 @@ export const ListPreviewSearchContainer = styled.div`
 
 export const ListAddButtonContainer = styled.div`
   width: fit-content;
+  @media (max-width: 410px) {
+    flex: 1 1 100%;
+  }
 `;
 
 export const SearchButtonContainer = styled(Link)`

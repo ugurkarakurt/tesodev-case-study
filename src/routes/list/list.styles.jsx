@@ -7,4 +7,8 @@ export const ListContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: #FCFCFC;
+  @media (max-width: 1280px) { 
+    width: 100%;
+    padding: 0 20px 50px 20px;
+  }
 `
