@@ -21,7 +21,6 @@ export const RecordsProvider = ({ children }) => {
   const [previousPage, setPreviousPage] = useState('');
   const apiUrl = config.apiUrl;
 
-
   useEffect(() => {
     if (!recordsMap) {
       const getRecordsMap = async () => {
@@ -54,6 +53,7 @@ export const RecordsProvider = ({ children }) => {
       setTotalPages(0);
     }
   }, [filteredRecords, itemsPerPage]);
+
 
   const pageNumbers = generatePageNumbers(currentPage, totalPages);
 

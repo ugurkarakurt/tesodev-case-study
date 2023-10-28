@@ -5,6 +5,8 @@ import Input from "../input/input.component";
 import { collectFormData, validationForAddForm } from '../../utils/validation/validation';
 import { post } from '../../utils/request/request.utils';
 import { RecordsContext } from '../../contexts/records.context';
+import { AlertContext } from '../../contexts/alert.context';
+import config from '../../config/config';
 
 const defaultFormFields = {
   nameSurname: {
@@ -43,6 +45,8 @@ const AddFormComponent = () => {
   const { filteredRecords, setFilteredRecords } = useContext(RecordsContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const { showAlert } = useContext(AlertContext);
+  const apiUrl = config.apiUrl;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,6 +63,16 @@ const AddFormComponent = () => {
 
     const hasErrors = Object.values(validationErrors).some(error => error);
 
+    if (hasErrors) {
+      showAlert({
+        isShow: true,
+        alertType: 'danger',
+        title: 'Validation Error',
+        description: { ...validationErrors },
+        buttonContent: 'Error',
+      });
+    }
+
     if (!hasErrors) {
       const formattedDate = formatToCustomDate(new Date());
       const postData = {
@@ -66,12 +80,19 @@ const AddFormComponent = () => {
         date: formattedDate,
       };
 
-      post("http://localhost:3000/results", postData)
+      post(apiUrl, postData)
         .then((response) => {
           setFilteredRecords([...filteredRecords, response]);
         })
         .then(() => {
           setFormFields(defaultFormFields);
+          showAlert({
+            isShow: true,
+            alertType: 'success',
+            title: 'The record was created successfully.',
+            description: "The new record was successfully registered on the list. You can check it on the list page.",
+            buttonContent: 'Correct',
+          });
         })
         .catch((error) => {
           console.error(error);

@@ -1,6 +1,7 @@
 export const collectFormData = (formFields) => {
   const formData = {
     nameSurname: formFields.nameSurname.value,
+    company: formFields.company.value,
     country: formFields.country.value,
     city: formFields.city.value,
     email: formFields.email.value,

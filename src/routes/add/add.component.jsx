@@ -4,6 +4,7 @@ import AddFormComponent from '../../components/add-form/add-form.component';
 import { AddContainer } from './add.styles';
 
 const Home = () => {
+
   return (
     <AddContainer>
       <AddNavigation />

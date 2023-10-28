@@ -10,7 +10,7 @@ import PageIcon from "./page.svg";
 import { ListContainer, ListItemsContainer, ListItemsWrapper, Divider, ListActionsContainer } from './list-items.styles';
 
 const ListItems = () => {
-  const { filteredRecords, searchValue, currentPage, itemsPerPage, setItemsPerPage, setSortingKey, sortingKey } = useContext(RecordsContext);
+  const { filteredRecords, currentPage, itemsPerPage, setItemsPerPage, setSortingKey, sortingKey } = useContext(RecordsContext);
 
   const handleClickByItemsPerPage = (itemsRange) => setItemsPerPage(itemsRange);
   const handleClickByOrderItems = (orderValue) => setSortingKey(orderValue);

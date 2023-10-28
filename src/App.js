@@ -5,7 +5,6 @@ import List from "./routes/list/list.component";
 import Add from "./routes/add/add.component.jsx";
 
 const App = () => {
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
