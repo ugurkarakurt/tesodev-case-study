@@ -1,6 +1,7 @@
-import { Success, Warning, Danger, Info, AlertContent, AlertTitle, AlertDescription, AlertButton } from './alert.styles';
+import { Success, Warning, Danger, Info, AlertContent, AlertTitle, AlertDescription, AlertButton, CloseButton } from './alert.styles';
 import { Fragment, useContext } from 'react';
 import { AlertContext } from '../../contexts/alert.context';
+import CloseIcon from "./x-circle.svg";
 
 export const ALERT_TYPE_CLASSES = {
   success: 'success', warning: 'warning', danger: 'danger', info: 'info'
@@ -16,7 +17,7 @@ const getAlert = (alertType = ALERT_TYPE_CLASSES.success) =>
 }[alertType]);
 
 const AlertMessage = () => {
-  const { alert } = useContext(AlertContext);
+  const { alert, hideAlert } = useContext(AlertContext);
   const { isShow, alertType, title, description, buttonContent } = alert;
   const CustomAlert = getAlert(alertType);
   let contentToDisplay = null;
@@ -35,11 +36,16 @@ const AlertMessage = () => {
     contentToDisplay = description;
   }
 
+  const closeAlert = () => hideAlert();
+
 
   return (
     <Fragment>
       {isShow && (
         <CustomAlert>
+          <CloseButton onClick={closeAlert}>
+            <img src={CloseIcon} alt="close_icon" />
+          </CloseButton>
           <AlertContent>
             <AlertTitle>
               {title}

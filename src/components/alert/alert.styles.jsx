@@ -37,7 +37,7 @@ export const AlertDescription = styled.p`
 `;
 
 export const AlertButton = styled.div`
-  align-self: flex-start;
+  margin-top: 10px;
   height: fit-content;
   border-radius: 48px;
   background: #34a853;
@@ -50,6 +50,16 @@ export const AlertButton = styled.div`
   color: #ffffff;
   cursor: pointer;
 `;
+
+export const CloseButton = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
 
 export const Success = styled.div`
   width: 375px;
