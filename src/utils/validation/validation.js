@@ -17,25 +17,18 @@ export const validationForAddForm = (formFields) => {
     const value = formFields[fieldName].value;
     switch (fieldName) {
       case "nameSurname":
-        if (!checknameSurname(value)) {
-          validationErrors[fieldName] = "Name Surname, only letters, min 4 – max 60 character must include.";
-        }
+        validationErrors[fieldName] = validateNameSurname(value);
         break;
+      case "company":
       case "country":
       case "city":
-        if (!checkCountryOrCity(value)) {
-          validationErrors[fieldName] = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}, only letters, min 2 – max 40 character must include.`;
-        }
+        validationErrors[fieldName] = validateCityOrCountry(value);
         break;
       case "email":
-        if (!checkEmail(value)) {
-          validationErrors[fieldName] = "Invalid email address. Please enter a valid email address.";
-        }
+        validationErrors[fieldName] = validateEmail(value);
         break;
       case "website":
-        if (!checkUrl(value)) {
-          validationErrors[fieldName] = "Invalid URL. Please enter a valid URL.";
-        }
+        validationErrors[fieldName] = validateUrl(value);
         break;
       default:
         break;
@@ -45,22 +38,46 @@ export const validationForAddForm = (formFields) => {
   return validationErrors;
 };
 
-function checknameSurname(value) {
-  const regex = /^[a-zA-Z\s]{4,60}$/;
-  return regex.test(value);
+function validateNameSurname(value) {
+  if (!/^[a-zA-Z\s]+$/.test(value)) {
+    return "Use only letters and spaces.";
+  }
+  if (value.length < 4) {
+    return "Enter at least 4 characters.";
+  }
+  if (value.length > 60) {
+    return "Enter up to 60 characters.";
+  }
+  if (value.split(/\s+/).length < 2) {
+    return "Enter at least 2 words.";
+  }
+  return false;
 }
 
-function checkCountryOrCity(value) {
-  const regex = /^[a-zA-Z\s]{2,40}$/;
-  return regex.test(value);
+function validateCityOrCountry(value) {
+  if (!/^[a-zA-Z\s]+$/.test(value)) {
+    return "Use only letters and spaces.";
+  }
+  if (value.length < 2) {
+    return "Enter at least 2 characters.";
+  }
+  if (value.length > 40) {
+    return "Enter up to 40 characters.";
+  }
+  return false;
 }
 
-function checkEmail(value) {
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return regex.test(value);
+function validateEmail(value) {
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
+    return "Invalid Email. Please enter a valid Email.";
+  }
+  return false;
 }
 
-function checkUrl(value) {
-  const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
-  return regex.test(value);
+function validateUrl(value) {
+  if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(value)) {
+    return "Invalid URL. Please enter a valid URL.";
+  }
+  return false;
+
 }

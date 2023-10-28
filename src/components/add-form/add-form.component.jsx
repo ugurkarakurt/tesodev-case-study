@@ -9,23 +9,33 @@ import { RecordsContext } from '../../contexts/records.context';
 const defaultFormFields = {
   nameSurname: {
     value: '',
-    error: ''
+    error: '',
+    displayname: 'Name Username',
+  },
+  company: {
+    value: '',
+    error: '',
+    displayname: 'Company',
   },
   country: {
     value: '',
-    error: ''
+    error: '',
+    displayname: 'Country',
   },
   city: {
     value: '',
-    error: ''
+    error: '',
+    displayname: 'City',
   },
   email: {
     value: '',
-    error: ''
+    error: '',
+    displayname: 'Email',
   },
   website: {
     value: '',
-    error: ''
+    error: '',
+    displayname: 'Website',
   }
 };
 
@@ -77,6 +87,7 @@ const AddFormComponent = () => {
       [name]: {
         value,
         error: '',
+        displayname: defaultFormFields[name].displayname,
       },
     }));
 
@@ -103,7 +114,7 @@ const AddFormComponent = () => {
             key={fieldName}
             required
             children={`Enter ${fieldName}`}
-            label={fieldName}
+            label={formFields[fieldName].displayname}
             error={formFields[fieldName].error}
             type="text"
             onChange={handleChange}
