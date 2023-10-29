@@ -4,6 +4,7 @@ import ListPreview from '../../components/list-preview/list-preview.component';
 import { HomeContainer } from './home.styles';
 import { RecordsContext } from '../../contexts/records.context';
 import Slider from '../../components/carousel/slider.component';
+import Footer from '../../components/footer/footer.component';
 
 const Home = () => {
   const { setPreviousPage } = useContext(RecordsContext);
@@ -17,6 +18,7 @@ const Home = () => {
       <HomeNavigation />
       <ListPreview />
       <Slider />
+      <Footer />
     </HomeContainer>
   );
 }

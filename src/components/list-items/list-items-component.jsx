@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { RecordsContext } from '../../contexts/records.context';
 import ListItem from '../list-item/list-item';
 import Pagination from '../pagination/pagination.component';

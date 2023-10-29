@@ -71,6 +71,19 @@ const Slider = () => {
             maxWidth: 1280,
           },
           {
+            maxWidth: 991,
+            forwardBtnProps: {
+              style: {
+                display: "none"
+              }
+            },
+            backwardBtnProps: {
+              style: {
+                display: "none"
+              }
+            },
+          },
+          {
             itemsToShow: 1,
             maxWidth: 768,
           },
