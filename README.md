@@ -4,8 +4,8 @@
 
 ## Search App
 
-Visit Project = [Tesodev Case Study](https://ulvis.net/Im6F){:target="_blank"}
-API URL = [Metin](https://ulvis.net/WAca){:target="_blank"}
+Visit Project = [Tesodev Case Study](https://ulvis.net/Im6F)
+API URL = [Tosedev API](https://ulvis.net/WAca)
 
 _Urls shortened with ulvis.net._
 
