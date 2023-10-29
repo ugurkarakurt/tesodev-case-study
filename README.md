@@ -77,12 +77,12 @@ Some in-app images
 
 | Image 1 | Image 2 |
 | ------- | ------- |
-| ![Homepage](./screenshot4.png) | ![Filtered Homepage](./screenshot3.png) |
+| ![Homepage](./images/screenshot4.png) | ![Filtered Homepage](./images/screenshot3.png) |
 | Homepage | Filtered Homepage |
 
 | Image 3 | Image 4 |
 | ------- | ------- |
-| ![Add Form Page](./screenshot2.png) | ![List Page](./screenshot5.png) |
+| ![Add Form Page](./images/screenshot2.png) | ![List Page](./images/screenshot5.png) |
 | Add Form Page | List Page |
 
 
