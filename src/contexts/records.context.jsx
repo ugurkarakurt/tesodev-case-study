@@ -29,8 +29,18 @@ export const RecordsProvider = ({ children }) => {
       };
       getRecordsMap();
     }
+
+    if (!previousPage) {
+      setPreviousPage(localStorage.getItem("previousPage"))
+    }
+
   }, []);
 
+  useEffect(() => {
+    if (previousPage) {
+      localStorage.setItem("previousPage", previousPage)
+    }
+  }, [previousPage]);
 
   useEffect(() => {
     if (searchValue.length < 2) {
