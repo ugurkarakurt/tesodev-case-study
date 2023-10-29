@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Tesodev Case Study
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Project Logo](./src/components/logo/home-logo.jpeg)
 
-## Available Scripts
+## Search App
 
-In the project directory, you can run:
+#### A search engine was created with this case study.
 
-### `npm start`
+- We can filter our data with any of the keys id, name, company, email, phone, website, country, city, date.
+- In addition, after searching, we can see these searches on the search list page and we can sort them in this section.
+- When we want to add data, we can go to the add page and add our new data.
+- With the Pagination feature, we can control our data more easily.
+- We can also update how many data we can see in the pagination according to our wishes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Operations performed during project creation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The data used for the search is taken from the json file that comes with the case declaration and converted to an appropriate Object with a loop.
 
-### `npm test`
+```bash
+const data = JSONFILE
+const cols = data.cols;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const organizedData = data.data.map((row) => {
+  const rowData = {};
+  cols.forEach((col, index) => {
+    rowData[col] = row[index];
+  });
+  return rowData;
+});
 
-### `npm run build`
+console.log(organizedData);
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The object was converted into a Restful API with Node.js and launched on the Heroku platform.
+- The project itself was also deployed on Heroku.
+- The API supports GET and POST requests for now, but other methods will be added as the project develops.
+- In the project, a dynamic structure was established by paying attention to React rendering and state management. Context API was used to provide and manage this structure.
+- Styled Component was used for the css part. In this context, examples of dynamic operations with styled component are available in the project.
+- Functional coding was done in the whole project. In this context, the operations to be performed with auxiliary functions were written under the utils folder.
+- The react-router-dom library was used for routing operations. In this context, our homepages and related paths were created in the folder named routes.
+- In the project created entirely with components, general components used dynamically were included. For example, input, button etc.
+- Completely written code for pagination. No library was used.
+- Completely written code for search and sorting. No auxiliary library was used.
+- Since features such as pagination, search and sorting are done with Context API, a structure that is interconnected and works properly has been established thanks to state management. The benefit of this is that, for example, we want to add a new sorting feature; it will be enough to add a new key to our related state. The same applies to the items per page property.
+- Auxiliary libraries were used for Slider and Map fields.
+- Although it is not a responsive design, responsive feature was added.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- React Router Dom
+- React Leaflet (for map)
+- React Simply Carousel (for slider)
+- Styled Components 
+- Styled Reset
 
-### `npm run eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+First of all, we need to convert our json file, which we will use as db using json-server, to API.
+We can set up our project in the local environment by running the codes below in order.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install json-server
+json-server --watch db.json
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+_In order for the project to work properly before launching it locally, you need the correct json file containing the data to be used as db. If you do not have this json file, you need to update the **apiUrl** in the config file._
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Examples
+Some in-app images
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Image 1 | Image 2 |
+| ------- | ------- |
+| ![Homepage](./screenshot4.png) | ![Filtered Homepage](./screenshot3.png) |
+| Homepage | Filtered Homepage |
 
-### Code Splitting
+| Image 3 | Image 4 |
+| ------- | ------- |
+| ![Add Form Page](./screenshot2.png) | ![List Page](./screenshot5.png) |
+| Add Form Page | List Page |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
