@@ -38,7 +38,7 @@ console.log(organizedData);
 
 - The object was converted into a Restful API with Node.js and launched on the Heroku platform.
 - The project itself was also deployed on Heroku.
-- The API supports GET and POST requests for now, but other methods will be added as the project develops.
+- The API I wrote supports GET, POST, PATCH and DELETE methods. We can add update and delete in the future.
 - In the project, a dynamic structure was established by paying attention to React rendering and state management. Context API was used to provide and manage this structure.
 - Styled Component was used for the css part. In this context, examples of dynamic operations with styled component are available in the project.
 - Functional coding was done in the whole project. In this context, the operations to be performed with auxiliary functions were written under the utils folder.
