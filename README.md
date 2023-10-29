@@ -4,6 +4,11 @@
 
 ## Search App
 
+Visit Project = [Tesodev Case Study](https://ulvis.net/Im6F){:target="_blank"}
+API URL = [Metin](https://ulvis.net/WAca){:target="_blank"}
+
+_Urls shortened with ulvis.net._
+
 #### A search engine was created with this case study.
 
 - We can filter our data with any of the keys id, name, company, email, phone, website, country, city, date.
