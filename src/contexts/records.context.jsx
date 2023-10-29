@@ -25,7 +25,7 @@ export const RecordsProvider = ({ children }) => {
     if (!recordsMap) {
       const getRecordsMap = async () => {
         const RecordsData = await get(apiUrl);
-        setRecordsMap(RecordsData);
+        setRecordsMap(RecordsData.results);
       };
       getRecordsMap();
     }

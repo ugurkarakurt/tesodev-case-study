@@ -3,9 +3,9 @@ import { EmptyResultContainer } from './empty-result.styles';
 import { RecordsContext } from '../../contexts/records.context';
 
 const EmptyResult = () => {
-  const { isContentLoaded, filteredRecords } = useContext(RecordsContext);
+  const { filteredRecords } = useContext(RecordsContext);
 
-  if (isContentLoaded && filteredRecords && !filteredRecords.length) {
+  if (filteredRecords && !filteredRecords.length) {
     return <EmptyResultContainer>The record you are looking for is not found.</EmptyResultContainer>;
   }
 
