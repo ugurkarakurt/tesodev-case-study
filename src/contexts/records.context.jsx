@@ -64,7 +64,6 @@ export const RecordsProvider = ({ children }) => {
     }
   }, [filteredRecords, itemsPerPage]);
 
-
   const pageNumbers = generatePageNumbers(currentPage, totalPages);
 
   useEffect(() => {
