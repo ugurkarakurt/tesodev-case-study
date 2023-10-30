@@ -3,7 +3,6 @@ import { AddFormContainer, FormContainer, ButtonContainer } from "./add-form.sty
 import Button from '../button/button.component';
 import Input from "../input/input.component";
 import { collectFormData, validationForAddForm } from '../../utils/validation/validation';
-import { post } from '../../utils/request/request.utils';
 import { RecordsContext } from '../../contexts/records.context';
 import { AlertContext } from '../../contexts/alert.context';
 import config from '../../config/config';
@@ -42,7 +41,7 @@ const defaultFormFields = {
 };
 
 const AddFormComponent = () => {
-  const { filteredRecords, setFilteredRecords } = useContext(RecordsContext);
+  const { filteredRecords, setFilteredRecords, addRecordToList } = useContext(RecordsContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const { showAlert } = useContext(AlertContext);
@@ -80,11 +79,19 @@ const AddFormComponent = () => {
         date: formattedDate,
       };
 
-      post(apiUrl, postData)
+      addRecordToList(postData)
         .then((response) => {
+          if (response.error_code) {
+            showAlert({
+              isShow: true,
+              alertType: 'danger',
+              title: "An error occurred during the Addition process",
+              description: response.message,
+              buttonContent: 'Error',
+            });
+            return;
+          }
           setFilteredRecords([...filteredRecords, response]);
-        })
-        .then(() => {
           setFormFields(defaultFormFields);
           showAlert({
             isShow: true,
@@ -93,9 +100,6 @@ const AddFormComponent = () => {
             description: "The new record was successfully registered on the list. You can check it on the list page.",
             buttonContent: 'Correct',
           });
-        })
-        .catch((error) => {
-          console.error(error);
         });
     }
   };

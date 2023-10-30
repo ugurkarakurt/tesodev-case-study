@@ -6,7 +6,8 @@ export const get = async (URL) => {
     const responseData = response.data;
     return responseData;
   } catch (error) {
-    console.error("API error:", error);
+    const responseData = error.response.data;
+    return responseData;
   }
 };
 
@@ -16,6 +17,27 @@ export const post = async (URL, data) => {
     const responseData = response.data;
     return responseData;
   } catch (error) {
-    console.error("API error:", error);
+    const responseData = error.response.data;
+    return responseData;
+  }
+};
+
+export const remove = async (URL) => {
+  try {
+    const response = await axios.delete(URL);
+    return response.data;
+  } catch (error) {
+    const responseData = error.response.data;
+    return responseData;
+  }
+};
+
+export const patch = async (URL, data) => {
+  try {
+    const response = await axios.patch(URL, data);
+    return response.data;
+  } catch (error) {
+    const responseData = error.response.data;
+    return responseData;
   }
 };

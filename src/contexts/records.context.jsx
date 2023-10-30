@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { get } from '../utils/request/request.utils';
+import { get, post, remove } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
 import { generatePageNumbers, setOrderedItems } from '../utils/pagination/pagination';
 import config from '../config/config';
@@ -74,6 +74,16 @@ export const RecordsProvider = ({ children }) => {
     }
   }, [sortingKey]);
 
+  const addRecordToList = async (recordToAdd) => {
+    const response = await post(apiUrl, recordToAdd);
+    return response;
+  }
+
+  const removeRecordFromList = async (recordToRemove) => {
+    const { id } = recordToRemove;
+    const response = await remove(`${apiUrl}/${id}`);
+    return response;
+  };
 
 
   const value = {
@@ -92,7 +102,9 @@ export const RecordsProvider = ({ children }) => {
     sortingKey,
     setSortingKey,
     previousPage,
-    setPreviousPage
+    setPreviousPage,
+    addRecordToList,
+    removeRecordFromList
   };
 
   return (

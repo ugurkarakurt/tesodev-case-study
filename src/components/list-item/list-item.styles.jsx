@@ -9,6 +9,19 @@ export const hoverEffect = css`
   }
 `;
 
+export const DeleteButton = styled.div`
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 20px;
+  z-index: 2;
+  cursor: pointer;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+`
+
 export const ListItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -17,6 +30,7 @@ export const ListItemContainer = styled.div`
   gap: 12px;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
   ${({ $ispath }) => $ispath && hoverEffect};
 `;
 
