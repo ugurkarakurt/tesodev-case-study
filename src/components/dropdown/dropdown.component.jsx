@@ -40,8 +40,8 @@ const Dropdown = ({ children, dropdownType, selectedOption, onOptionClicked, opt
 
   return (
     <CustomDropdown ref={dropdownRef}>
-      <img src={icon} alt="dropdown_icon" />
       <DropDownHeader onClick={toggling}>
+        <img src={icon} alt="dropdown_icon" />
         {selectedOption ? selectedOption : children}
       </DropDownHeader>
       {isOpen && (

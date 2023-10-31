@@ -82,3 +82,72 @@ function validateUrl(value) {
   return false;
 
 }
+
+export const defaultFormFields = {
+  nameSurname: {
+    value: '',
+    error: '',
+    displayname: 'Name Username',
+  },
+  company: {
+    value: '',
+    error: '',
+    displayname: 'Company',
+  },
+  country: {
+    value: '',
+    error: '',
+    displayname: 'Country',
+  },
+  city: {
+    value: '',
+    error: '',
+    displayname: 'City',
+  },
+  email: {
+    value: '',
+    error: '',
+    displayname: 'Email',
+  },
+  website: {
+    value: '',
+    error: '',
+    displayname: 'Website',
+  }
+};
+
+export const editingRecord = (defaultFormFields, itemToUpdate) => {
+  const mergedFields = {
+    ...defaultFormFields,
+    city: {
+      ...defaultFormFields.city,
+      value: itemToUpdate.city
+
+    },
+    company: {
+      ...defaultFormFields.company,
+      value: itemToUpdate.company
+
+    },
+    country: {
+      ...defaultFormFields.country,
+      value: itemToUpdate.country
+
+    },
+    email: {
+      ...defaultFormFields.email,
+      value: itemToUpdate.email
+
+    },
+    nameSurname: {
+      ...defaultFormFields.nameSurname,
+      value: itemToUpdate.nameSurname
+
+    },
+    website: {
+      ...defaultFormFields.website,
+      value: itemToUpdate.website
+    }
+  }
+  return mergedFields;
+}

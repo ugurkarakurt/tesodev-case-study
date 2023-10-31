@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { RecordsContext } from '../../contexts/records.context';
 import { PaginstionContainer, PaginationButton, PaginationButtonContainer } from "./pagination.stlyes";
+import { generatePageNumbers } from '../../utils/pagination/pagination';
 
 function Pagination() {
-  const { filteredRecords, currentPage, setCurrentPage, totalPages, pageNumbers, itemsPerPage } = useContext(RecordsContext);
+  const { filteredRecords, currentPage, setCurrentPage, totalPages, itemsPerPage } = useContext(RecordsContext);
+  const pageNumbers = generatePageNumbers(currentPage, totalPages);
+
   const [isClicked, setIsClicked] = useState(false);
 
   const handlePageChange = (page) => {
@@ -21,7 +24,7 @@ function Pagination() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filteredRecords]);  
+  }, [filteredRecords]);
 
   return (
     <>

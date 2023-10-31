@@ -21,6 +21,18 @@ export const DeleteButton = styled.div`
     height: 100%;
   }
 `
+export const EditButton = styled.div`
+  position: absolute;
+  right: 20px;
+  top: 4px;
+  width: 16px;
+  z-index: 2;
+  cursor: pointer;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+`
 
 export const ListItemContainer = styled.div`
   display: flex;

@@ -1,51 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AddFormContainer, FormContainer, ButtonContainer } from "./add-form.styles";
 import Button from '../button/button.component';
 import Input from "../input/input.component";
-import { collectFormData, validationForAddForm } from '../../utils/validation/validation';
+import { collectFormData, defaultFormFields, validationForAddForm, editingRecord } from '../../utils/validation/validation';
 import { RecordsContext } from '../../contexts/records.context';
 import { AlertContext } from '../../contexts/alert.context';
-import config from '../../config/config';
-
-const defaultFormFields = {
-  nameSurname: {
-    value: '',
-    error: '',
-    displayname: 'Name Username',
-  },
-  company: {
-    value: '',
-    error: '',
-    displayname: 'Company',
-  },
-  country: {
-    value: '',
-    error: '',
-    displayname: 'Country',
-  },
-  city: {
-    value: '',
-    error: '',
-    displayname: 'City',
-  },
-  email: {
-    value: '',
-    error: '',
-    displayname: 'Email',
-  },
-  website: {
-    value: '',
-    error: '',
-    displayname: 'Website',
-  }
-};
 
 const AddFormComponent = () => {
-  const { filteredRecords, setFilteredRecords, addRecordToList } = useContext(RecordsContext);
+  const { addRecordToList, itemToUpdate, editRecordToList } = useContext(RecordsContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const { showAlert } = useContext(AlertContext);
-  const apiUrl = config.apiUrl;
+  const isEdit = Object.keys(itemToUpdate).length;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,7 +32,7 @@ const AddFormComponent = () => {
       showAlert({
         isShow: true,
         alertType: 'danger',
-        title: 'Validation Error',
+        title: "Validation Error.",
         description: { ...validationErrors },
         buttonContent: 'Error',
       });
@@ -79,28 +45,54 @@ const AddFormComponent = () => {
         date: formattedDate,
       };
 
-      addRecordToList(postData)
-        .then((response) => {
-          if (response.error_code) {
+      if (isEdit) {
+        editRecordToList(postData)
+          .then((response) => {
+            if (response.error_code) {
+              showAlert({
+                isShow: true,
+                alertType: 'danger',
+                title: "An error occurred during the Editing process.",
+                description: response.message,
+                buttonContent: 'Error',
+              });
+              return;
+            }
+            setFormFields(defaultFormFields);
             showAlert({
               isShow: true,
-              alertType: 'danger',
-              title: "An error occurred during the Addition process",
-              description: response.message,
-              buttonContent: 'Error',
+              alertType: 'success',
+              title: "The record was edited successfully.",
+              description: "The record was successfully edited on the list. You can check it on the list page.",
+              buttonContent: 'Correct',
             });
-            return;
-          }
-          setFilteredRecords([...filteredRecords, response]);
-          setFormFields(defaultFormFields);
-          showAlert({
-            isShow: true,
-            alertType: 'success',
-            title: 'The record was created successfully.',
-            description: "The new record was successfully registered on the list. You can check it on the list page.",
-            buttonContent: 'Correct',
+          })
+        return;
+      }
+
+      if (!isEdit) {
+        addRecordToList(postData)
+          .then((response) => {
+            if (response.error_code) {
+              showAlert({
+                isShow: true,
+                alertType: 'danger',
+                title: "An error occurred during the Addition process.",
+                description: "An error occurred during the Addition process.",
+                buttonContent: 'Error',
+              });
+              return;
+            }
+            setFormFields(defaultFormFields);
+            showAlert({
+              isShow: true,
+              alertType: 'success',
+              title: "The record was created successfully.",
+              description: "The new record was successfully registered on the list. You can check it on the list page.",
+              buttonContent: 'Correct',
+            });
           });
-        });
+      }
     }
   };
 
@@ -131,6 +123,12 @@ const AddFormComponent = () => {
     return `${month}/${day}/${year}`;
   };
 
+  useEffect(() => {
+    if (isEdit) {
+      setFormFields(editingRecord(defaultFormFields, itemToUpdate));
+    }
+  }, [isEdit, itemToUpdate]);
+
   return (
     <AddFormContainer>
       <FormContainer onSubmit={handleSubmit}>
@@ -148,7 +146,10 @@ const AddFormComponent = () => {
           />
         ))}
         <ButtonContainer>
-          <Button buttonType="submit" disabled={isSubmitDisabled} children="Add" type="submit" />
+          {Object.keys(itemToUpdate).length
+            ? (<Button buttonType="submit" children="Edit" type="submit" />)
+            : (<Button buttonType="submit" disabled={isSubmitDisabled} children="Add" type="submit" />)}
+
         </ButtonContainer>
       </FormContainer>
     </AddFormContainer>

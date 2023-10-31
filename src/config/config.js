@@ -1,4 +1,4 @@
-let apiUrl = 'https://tesodev-data-f0118947ad8e.herokuapp.com/results'
+let apiUrl = "https://tesodev-data-f0118947ad8e.herokuapp.com/results";
 
 // if (process.env.NODE_ENV === 'production') {
 //   apiUrl = 'https://tesodev-data-f0118947ad8e.herokuapp.com/results';

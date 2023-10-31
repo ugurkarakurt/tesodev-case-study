@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { get, post, remove } from '../utils/request/request.utils';
+import { get, post, remove, patch } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
-import { generatePageNumbers, setOrderedItems } from '../utils/pagination/pagination';
+import { setOrderedItems } from '../utils/pagination/pagination';
 import config from '../config/config';
 
 export const RecordsContext = createContext();
@@ -12,28 +12,21 @@ export const useRecords = () => {
 
 export const RecordsProvider = ({ children }) => {
   const [recordsMap, setRecordsMap] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
   const [filteredRecords, setFilteredRecords] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [sortingKey, setSortingKey] = useState('');
   const [totalPages, setTotalPages] = useState(0);
   const [previousPage, setPreviousPage] = useState('');
+  const [itemToUpdate, setItemToUpdate] = useState({});
   const apiUrl = config.apiUrl;
 
   useEffect(() => {
-    if (!recordsMap) {
-      const getRecordsMap = async () => {
-        const RecordsData = await get(apiUrl);
-        setRecordsMap(RecordsData.results);
-      };
-      getRecordsMap();
-    }
+    getRecordList();
 
     if (!previousPage) {
       setPreviousPage(localStorage.getItem("previousPage"))
     }
-
   }, []);
 
   useEffect(() => {
@@ -43,44 +36,50 @@ export const RecordsProvider = ({ children }) => {
   }, [previousPage]);
 
   useEffect(() => {
-    if (searchValue.length < 2) {
-      setFilteredRecords(recordsMap);
-    } else {
-      const filteredSearchValue = filterWithSearchValue(recordsMap, searchValue)
-      if (sortingKey && filteredSearchValue) {
-        const sortedRecords = setOrderedItems([...filteredSearchValue], sortingKey);
-        setFilteredRecords(sortedRecords);
-        return
-      }
-      setFilteredRecords(filteredSearchValue);
-    }
-  }, [recordsMap, searchValue, sortingKey]);
+    setFilteredRecords(recordsMap);
+  }, [recordsMap]);
 
   useEffect(() => {
-    if (filteredRecords && itemsPerPage) {
+    if (recordsMap) {
       setTotalPages(Math.ceil(filteredRecords.length / itemsPerPage));
     } else {
       setTotalPages(0);
     }
   }, [filteredRecords, itemsPerPage]);
 
-  const pageNumbers = generatePageNumbers(currentPage, totalPages);
-
   useEffect(() => {
-    if (sortingKey && filteredRecords) {
+    if (recordsMap) {
       const sortedRecords = setOrderedItems([...filteredRecords], sortingKey);
       setFilteredRecords(sortedRecords);
     }
   }, [sortingKey]);
 
+  const searchRecord = (searchValue) => {
+    recordsMap && setFilteredRecords(filterWithSearchValue(recordsMap, searchValue, sortingKey));
+  }
+
+  const getRecordList = async () => {
+    const RecordsData = await get(apiUrl);
+    setRecordsMap(RecordsData.results);
+  }
+
   const addRecordToList = async (recordToAdd) => {
     const response = await post(apiUrl, recordToAdd);
+    getRecordList()
     return response;
   }
+
+  const editRecordToList = async (recordToEdit) => {
+    const { id } = itemToUpdate;
+    const response = await patch(`${apiUrl}/${id}`, recordToEdit);
+    getRecordList()
+    return response;
+  };
 
   const removeRecordFromList = async (recordToRemove) => {
     const { id } = recordToRemove;
     const response = await remove(`${apiUrl}/${id}`);
+    getRecordList()
     return response;
   };
 
@@ -88,8 +87,6 @@ export const RecordsProvider = ({ children }) => {
   const value = {
     recordsMap,
     setRecordsMap,
-    searchValue,
-    setSearchValue,
     filteredRecords,
     setFilteredRecords,
     currentPage,
@@ -97,13 +94,16 @@ export const RecordsProvider = ({ children }) => {
     itemsPerPage,
     setItemsPerPage,
     totalPages,
-    pageNumbers,
     sortingKey,
     setSortingKey,
     previousPage,
     setPreviousPage,
     addRecordToList,
-    removeRecordFromList
+    removeRecordFromList,
+    itemToUpdate,
+    setItemToUpdate,
+    editRecordToList,
+    searchRecord
   };
 
   return (

@@ -58,6 +58,8 @@ const isActive = css`
 `;
 
 export const DropDownHeader = styled.div`
+  padding: 5px;
+  padding-left: 20px;
   width: 100%;
   height: 100%;
   user-select: none;
@@ -65,7 +67,6 @@ export const DropDownHeader = styled.div`
   font-size: 18px;
   font-weight: 500;
   text-align: center;
-  padding: 5px;
 `;
 
 export const DropDownBody = styled.div`
@@ -101,12 +102,11 @@ export const DropDownListItem = styled.li`
 `;
 
 export const BaseDropdown = styled.div`
-  width: 75px;
+  min-width: 75px;
   border-radius: 8px;
   border: 1px solid #414141;
   background: #f3f2f2;
   position: relative;
-  padding: 0 10px 0 30px;
   cursor: pointer;
   img{
     position: absolute;
@@ -117,13 +117,13 @@ export const BaseDropdown = styled.div`
   }
 `;
 export const OrderDropdown = styled(BaseDropdown)`
-  width: fit-content;
+  width: 130px;
 
   ${DropDownHeader} {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 90px;
+    padding-left: 40px;
   }
   ${DropDownBody} {
     width: fit-content;
