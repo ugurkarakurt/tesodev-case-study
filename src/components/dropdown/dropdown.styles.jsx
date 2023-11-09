@@ -79,10 +79,15 @@ export const DropDownBody = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
+  z-index: 10;
   top: calc(100% + 15px);
   left: 0;
   animation: ${navbarAnimation} 1000ms linear both;
   gap: 2px;
+  @media (max-width: 991px) {
+   right: 0;
+   left: auto;
+  }
 `;
 
 export const DropDownListItem = styled.li`

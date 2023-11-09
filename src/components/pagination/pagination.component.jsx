@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { RecordsContext } from '../../contexts/records.context';
-import { PaginstionContainer, PaginationButton, PaginationButtonContainer } from "./pagination.stlyes";
-import { generatePageNumbers } from '../../utils/pagination/pagination';
+import { PaginationContainer, PaginationButton, PaginationButtonContainer, CurrentPageContainer } from "./pagination.stlyes";
+import { generatePageNumbers } from '../../utils/pagination/pagination.utils';
 
 function Pagination() {
   const { filteredRecords, currentPage, setCurrentPage, totalPages, itemsPerPage } = useContext(RecordsContext);
@@ -29,7 +29,7 @@ function Pagination() {
   return (
     <>
       {filteredRecords && (filteredRecords.length > itemsPerPage) && (
-        <PaginstionContainer>
+        <PaginationContainer>
           <PaginationButtonContainer>
             <PaginationButton disabled={currentPage < 2} $isdirection={true} onClick={() => handlePageChange(currentPage - 1)}>
               Previous
@@ -49,7 +49,10 @@ function Pagination() {
               Next
             </PaginationButton>
           </PaginationButtonContainer>
-        </PaginstionContainer>
+          <CurrentPageContainer>
+            {currentPage}. of {totalPages}
+          </CurrentPageContainer>
+        </PaginationContainer>
       )}
     </>
 

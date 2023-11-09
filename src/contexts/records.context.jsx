@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { get, post, remove, patch } from '../utils/request/request.utils';
 import { filterWithSearchValue } from '../utils/filter/filter.utils';
-import { setOrderedItems } from '../utils/pagination/pagination';
+import { setOrderedItems } from '../utils/pagination/pagination.utils';
 import config from '../config/config';
 
 export const RecordsContext = createContext();

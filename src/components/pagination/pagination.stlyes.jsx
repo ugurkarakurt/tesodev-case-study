@@ -78,9 +78,20 @@ export const activeButton = css`
   animation: ${slideAnimation} 1000ms linear both;
 `;
 
-export const PaginstionContainer = styled.div`
+export const PaginationContainer = styled.div`
+  position: relative;
   width: 100%;
 `;
+
+export const CurrentPageContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: calc(100% + 10px);
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: bold;
+`;
+
 export const PaginationButtonContainer = styled.div`
   display: flex;
   justify-content: center;

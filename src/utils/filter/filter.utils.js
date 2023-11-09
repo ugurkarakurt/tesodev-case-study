@@ -1,4 +1,4 @@
-import { setOrderedItems } from "../pagination/pagination";
+import { setOrderedItems } from "../pagination/pagination.utils";
 
 export const filterWithSearchValue = (recordsMap, searchValue, sortingKey) => {
   const newFilteredRecords = recordsMap.filter((record) => {

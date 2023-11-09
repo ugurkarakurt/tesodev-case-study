@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AddFormContainer, FormContainer, ButtonContainer } from "./add-form.styles";
 import Button from '../button/button.component';
 import Input from "../input/input.component";
-import { collectFormData, defaultFormFields, validationForAddForm, editingRecord } from '../../utils/validation/validation';
+import { collectFormData, defaultFormFields, validationForAddForm, editingRecord } from '../../utils/validation/validation.utils';
 import { RecordsContext } from '../../contexts/records.context';
 import { AlertContext } from '../../contexts/alert.context';
 
