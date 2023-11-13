@@ -90,6 +90,10 @@ export const CurrentPageContainer = styled.div`
   transform: translateY(-50%);
   font-size: 14px;
   font-weight: bold;
+  display: none;
+  @media (max-width: 991px) {
+    display: block;
+  }
 `;
 
 export const PaginationButtonContainer = styled.div`
