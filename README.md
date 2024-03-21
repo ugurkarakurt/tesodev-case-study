@@ -4,8 +4,8 @@
 
 ## Search App
 
-Visit Project = [Tesodev Case Study](https://ulvis.net/Im6F)<br>
-API URL = [API](https://ulvis.net/WAca)
+Visit Project = [Tesodev Case Study]([https://ulvis.net/Im6F](https://tesodev-case-study.vercel.app/))<br>
+API URL = [API](-)
 
 _Urls shortened with ulvis.net._
 
